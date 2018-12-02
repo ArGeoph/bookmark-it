@@ -20,8 +20,19 @@
     </nav>
         
     <main>
-        <h1>Welcome to Bookmark It!</h1>
-        <h3>Add, edit and access your bookmarks from anythere and from any device</h3>
+        <h1>Welcome to <span>Bookmark It!</span><br> Add, edit and access your bookmarks from anythere and from any device</h1>
+        <div class="mostPopular"> 
+            <h3>Most popular bookmarks our users added so far</h3>
+            <ol>
+                <li>Google <a href="https://www.google.com" target="_blank">Open</a></li>
+                <li>Google <a href="https://www.google.com" target="_blank">Link</a></li>
+                <li>Google <a href="https://www.google.com" target="_blank">Link</a></li>
+                <li>Google <a href="https://www.google.com" target="_blank">Link</a></li>
+                <li>Google <a href="https://www.google.com" target="_blank">Link</a></li>
+                <li>Google <a href="https://www.google.com" target="_blank">Link</a></li>
+            </ol>
+            
+        </div>
     </main>
 
     <footer>
