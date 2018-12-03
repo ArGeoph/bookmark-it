@@ -21,18 +21,12 @@
     </nav>
         
     <main>
-        <div class="registerContainer"> 
-            <h1>Register</h1>   
+        <div class="loginContainer"> 
+            <h1>Login</h1>   
             <form action="registerUser.php" method="Post" autocomplete="off" >
                 <input type="password" style="display:none">
-                <label>First name</label><input type="text" class="formFields" name="firstName" placeholder="John" required /><br>
-                <label>Last name</label><input type="text" class="formFields" name="lastName" placeholder="Doe" required /><br>
-                <label>Email</label><input type="email" class="formFields" name="lastName" placeholder="example@example.ca" required /><br>
-                 <input type="password" style="display:none">
                 <label>Login</label><input type="text" class="formFields" name="login" value="" autocomplete="new-password" required/><br>
-                <input type="password" style="display:none">
-                <label>Password</label><input type="password" class="formFields" name="password1" autocomplete="new-password" value="" required /><br>
-                <label>Repeat password</label><input type="password" class="formFields" autocomplete="new-password" name="password2" required /><br>
+                <label>Password</label><input type="password" class="formFields" name="password1" value="" autocomplete="new-password" required /><br>
                 <div class="buttonsContainer">
                     <input type="submit" class="formButton" value="Submit"/>
                     <input type="reset" class="formButton"  value="Clear fields" />
