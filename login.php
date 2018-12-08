@@ -14,8 +14,6 @@
         <p class="logo">Bookmark IT!</p>
         <div class="navButtons">
             <a href="index.php" >Main</a>
-            <a href="about.php" >About</a>
-            <a href="login.php">Login</a>
             <a href="register.php">Register</a>
         </div>
     </nav>

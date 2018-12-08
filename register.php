@@ -48,11 +48,11 @@
                     $errorMessages["email"] = " *Email format isn't correct";
                 }
 
-                //Check if the same login is registered already 
-                // if (!checkEmail($email)) {
-                //     $errorMessages["email"] = " Email is already used. Enter different email";
-                //     $_POST["email"] = "";
-                // }
+                //Check if the same email was used already 
+                if (emailIsUsed($email)) {
+                    $errorMessages["email"] = " Email is already used. Enter different email";
+                    $_POST["email"] = "";
+                }
             }
 
             if(empty($_POST["login"])) {
@@ -62,14 +62,14 @@
                 $login = checkUserInput($_POST["login"]);
 
                 if (strlen($login) < 6) {
-                    $errorMessages["login"] = " *Login must be longer that 6";
+                    $errorMessages["login"] = " *Login must be longer than 6";
                 }
 
                 //Check if the same login is registered already 
-                // if (!checkLogin($login)) {
-                //     $errorMessages["login"] = " Login is already used. Choose different login";
-                //     $_POST["login"] = "";
-                // }
+                if (loginIsUsed($login)) {
+                    $errorMessages["login"] = " Login is already used. Choose different one";
+                    $_POST["login"] = "";
+                }
             }
 
             if(empty($_POST["password1"])) {
@@ -79,7 +79,7 @@
                 $password1 = checkUserInput($_POST["password1"]);
 
                 if (strlen($password1) < 7) {
-                    $errorMessages["password1"] = " *password1 must be longer that 7s";
+                    $errorMessages["password1"] = " *password1 must be longer than 7";
                 }
             }
 
@@ -90,7 +90,7 @@
                 $password2 = checkUserInput($_POST["password2"]);
 
                 if (strlen($password2) < 7) {
-                    $errorMessages["password2"] = " *password1 must be longer that 7s";
+                    $errorMessages["password2"] = " *password1 must be longer than 7";
                 }
             }
 
@@ -99,6 +99,7 @@
                 $_POST["password2"] = "";
             }
 
+            isAllFieldsAreFilled(); //Check if all fields are correctly filled and create user in this case
         }
 
         //Function checking user input to prevent attacks on the website
@@ -109,15 +110,98 @@
 
             return $userInput;
         }
+
+        //***======================================================================= ***/
+        //*** Working with database ***/
+
+        //Function checking if email has been already used and it's in database
+        function emailIsUsed($email) {
+            $dbConnection = connectToDB();
+            mysqli_select_db($dbConnection, "bookmarks");
+
+            $sqlQuery = "SELECT userID FROM login WHERE email = \"" . $email . "\"" ;
+            $result = mysqli_query($dbConnection, $sqlQuery);
+
+            if (mysqli_num_rows($result) > 0) {
+                return true;
+            }
+            else {
+                return false;
+            }
+
+            mysqli_close($dbConnection);
+        }
+
+        //Function checking if login has been already used and it's in database
+        function loginIsUsed($login) {
+            $dbConnection = connectToDB();
+            mysqli_select_db($dbConnection, "bookmarks");
+
+            $sqlQuery = "SELECT userID FROM login WHERE log = \"" . $login . "\"";
+            $result = mysqli_query($dbConnection, $sqlQuery);
+
+            if (mysqli_num_rows($result) > 0) {
+                return true;
+            }
+            else {
+                return false;
+            }
+
+            mysqli_close($dbConnection);
+        }
+
+        //Check if all fields are entered and there's no errors and call function writing everything to database if it's the case 
+        function isAllFieldsAreFilled() {
+            //iterate through error array to see if there's any errors 
+            foreach ($GLOBALS["errorMessages"] as $error) {
+                if ($error != "") {
+                    return;
+                }
+            }
+
+            //if reached this point it means that there's no any errors
+            createUser();
+        }
+
+        //Create user and write everything to database 
+        function createUser() {
+            $dbConnection = connectToDB();
+            mysqli_select_db($dbConnection, "bookmarks");
+
+            $query = "INSERT INTO login (email, log, pass, timeCreated) VALUES (" . "\"" .  $GLOBALS["email"] . "\"" .  "," . "\"" . $GLOBALS["login"] . "\"" . "," 
+            . "\"" . password_hash($GLOBALS["password1"], PASSWORD_BCRYPT) . "\"" ."," . "\"" . date("Y-M-D h:i:sa") . "\"" . ")";
+
+            $result = mysqli_query($dbConnection, $query);
+
+            if ($result) {
+                echo "User created";
+            }
+            else {
+                echo "Error adding user, try later";
+            }
+        }
+        
+        //Function connecting to database and returning database handler
+        function connectToDB() {
+            $dbConnection = mysqli_connect("localhost", "testUser", "GHNKCh3hgmpdE3Ka"); //Connect to db
+
+            if (!$dbConnection) {
+                die ("Couldn't connect to database. Try later or check your credentials");
+            }
+            else {
+                echo ("Database connection successful");
+            }
+            return $dbConnection;
+        }        
+    //===========================================================================================================================//
     ?>
+
     <!-- Nav menu -->
     <nav>
         <p class="logo">Bookmark IT!</p>
         <div class="navButtons">
             <a href="index.php" >Main</a>
-            <a href="about.php" >About</a>
             <a href="login.php">Login</a>
-            <a href="register.php">Register</a>
         </div>
     </nav>
         
@@ -149,7 +233,7 @@
     </main>
 
     <footer>
-        <h3>Kirill Golubev &copy;<?php echo date('Y') ?></h3>
+        <h3>Kirill Golubev &copy;<?php echo date("Y-M-D h:i:sa") ?></h3>
     </footer>
 </body>
 </html>

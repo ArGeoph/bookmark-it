@@ -13,7 +13,6 @@
     <nav>
         <p class="logo">Bookmark IT!</p>
         <div class="navButtons">
-            <a href="about.php" >About</a>
             <a href="index.php">Logout</a>
         </div>
     </nav>
