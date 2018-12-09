@@ -20,8 +20,8 @@
         
     <main>
         <div class="registerContainer"> 
-            <h3>Congratulations, your account has just been created:))</h3>
-            <h3>Now can login and start adding, editing and sharing your bookmarks!</h3>
+            <h3>Congratulations, your account has just been created &#9786;</h3>
+            <h3>Now you can login and start adding, editing and sharing your bookmarks! &#9733;</h3>
         </div>
     </main>
 

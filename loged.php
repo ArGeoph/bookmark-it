@@ -1,4 +1,34 @@
-<?php  session_start(); ?>
+<?php  session_start(); 
+    //Check if user is not authenticated
+    if (!$_SESSION["authenticated"]) {
+        //Redirect user to the page that not existent in case they are not authenticated
+        header ("Location http://127.0.0.1/tma2/part1/sagsadgqewhdgsadfdsa.php"); 
+    }
+    //=============================================================================//
+    //***PHP Code ***/
+
+        //Get user bookmarks from database
+        function getBookmarks() {
+            $dbConnection = connectToDB();
+            mysqli_select_db($dbConnection, "bookmarks");
+        }
+
+        //Function connecting to database and returning database handler
+        function connectToDB() {
+            $dbConnection = mysqli_connect("localhost", "testUser", "GHNKCh3hgmpdE3Ka"); //Connect to db
+
+            if (!$dbConnection) {
+                die ("Couldn't connect to database. Try later or check your credentials");
+            }
+            else {
+                echo ("Database connection successful");
+            }
+            return $dbConnection;
+        }  
+
+    //=============================================================================//
+    //***PHP Code Ends***/   
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,17 +45,72 @@
     <nav>
         <p class="logo">Bookmark IT!</p>
         <div class="navButtons">
-            <a href="index.php">Logout</a>
+            <a href="logout.php">Logout</a>
         </div>
     </nav>
         
     <main>
-        <div class="container"> 
-            <h1>Welcome <?php echo $_SESSION["login"]; ?>!</h1>   
+        <div class="bookmarksContainer"> 
+            <h1>Welcome <?php echo $_SESSION["login"]; ?>!</h1>  
+            
+
+
+
             <h3>You have the following bookmarks:</h3>
             <ol>
+                <!-- <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+                <!-- <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
                 <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-            </ol>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+
+                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li> -->
+            </ol> -->
             <button class="addButton">Add new bookmark</button>
         </div>
     </main>
