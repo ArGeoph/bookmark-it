@@ -1,5 +1,3 @@
-<?php  session_start(); ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,23 +13,20 @@
     <nav>
         <p class="logo">Bookmark IT!</p>
         <div class="navButtons">
-            <a href="index.php">Logout</a>
+            <a href="index.php" >Main</a>
+            <a href="login.php">Login</a>
         </div>
     </nav>
         
     <main>
-        <div class="container"> 
-            <h1>Welcome <?php echo $_SESSION["login"]; ?>!</h1>   
-            <h3>You have the following bookmarks:</h3>
-            <ol>
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-            </ol>
-            <button class="addButton">Add new bookmark</button>
+        <div class="registerContainer"> 
+            <h3>Congratulations, your account has just been created:))</h3>
+            <h3>Now can login and start adding, editing and sharing your bookmarks!</h3>
         </div>
     </main>
 
     <footer>
-        <h3>Kirill Golubev &copy;<?php echo date('Y') ?></h3>
+        <h3>Kirill Golubev &copy;<?php echo date("Y-M-DD h:i:sa") ?></h3>
     </footer>
 </body>
 </html>

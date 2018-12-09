@@ -13,7 +13,7 @@
         $errorMessages = array("firstName" => "", "lastName" => "", "email" => "", "login" => "", "password1" => "", "password2" => "");
         $firstName = $lastName = $email = $login = $password1 = $password2 = "";
         
-        //Check if user pressed sumbit button
+        //Check if user pressed submit button
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if (empty($_POST["firstName"])) {
                 $errorMessages["firstName"] = " *First name is required";
@@ -65,7 +65,7 @@
                     $errorMessages["login"] = " *Login must be longer than 6";
                 }
 
-                //Check if the same login is registered already 
+                //Check if the same login was used already 
                 if (loginIsUsed($login)) {
                     $errorMessages["login"] = " Login is already used. Choose different one";
                     $_POST["login"] = "";
@@ -169,12 +169,14 @@
             mysqli_select_db($dbConnection, "bookmarks");
 
             $query = "INSERT INTO login (email, log, pass, timeCreated) VALUES (" . "\"" .  $GLOBALS["email"] . "\"" .  "," . "\"" . $GLOBALS["login"] . "\"" . "," 
-            . "\"" . password_hash($GLOBALS["password1"], PASSWORD_BCRYPT) . "\"" ."," . "\"" . date("Y-M-D h:i:sa") . "\"" . ")";
+            . "\"" . password_hash($GLOBALS["password1"], PASSWORD_BCRYPT) . "\"" ."," . "\"" . date("Y-M-DD h:i:sa") . "\"" . ")";
 
             $result = mysqli_query($dbConnection, $query);
 
             if ($result) {
                 echo "User created";
+                header ("Location:  http://127.0.0.1/tma2/part1/success.php");
+                exit();
             }
             else {
                 echo "Error adding user, try later";
@@ -233,7 +235,7 @@
     </main>
 
     <footer>
-        <h3>Kirill Golubev &copy;<?php echo date("Y-M-D h:i:sa") ?></h3>
+        <h3>Kirill Golubev &copy;<?php echo date("Y-M-DD h:i:sa") ?></h3>
     </footer>
 </body>
 </html>
