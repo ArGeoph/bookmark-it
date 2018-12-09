@@ -235,7 +235,7 @@
     </main>
 
     <footer>
-        <h3>Kirill Golubev &copy;<?php echo date("Y-M-DD h:i:sa") ?></h3>
+        <h3>Kirill Golubev &copy;<?php echo date("Y") ?></h3>
     </footer>
 </body>
 </html>

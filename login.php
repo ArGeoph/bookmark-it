@@ -78,7 +78,7 @@
                 }
             }
             else {
-                $GLOBALS["logErrorMessages"]["logError"] = "* Login doesn't exist. Check your input";
+                $GLOBALS["logErrorMessages"]["logError"] = "* Login doesn't exist";
             }
         }
 
@@ -90,9 +90,8 @@
                 die ("Couldn't connect to database. Try later or check your credentials");
             }
             else {
-                echo ("Database connection successful");
+                return $dbConnection;
             }
-            return $dbConnection;
         }  
 
         //Function checking user input to prevent attacks on the website
