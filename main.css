@@ -163,6 +163,46 @@ main {
     position: relative;
 
 }
+.bookmarksContainer {
+    text-align: center;
+}
+ul {
+    list-style: none;
+}
+.bookmarkFiels {
+    color: black;
+    width: 210px;
+    height: 38px;
+    border-radius: 4px;
+    margin-right: 15px;
+    font-size: 1.2em;
+    border: 2px solid rgba(47, 109, 180, 0.7);
+    font-weight: bold;
+}
+.urlField {
+    width: 380px;
+
+}
+.bookmarkButton {
+    text-decoration: none;
+    font-size: 1.25em;
+    width: 120px;
+    height: 46px;
+    padding: 8px 10px;
+    margin: 5px 10px;
+    border-radius: 5px;
+    background-color: rgba(47, 109, 180, 0.7);
+    border: 2px solid rgba(47, 109, 180, 0.6);
+    color: whitesmoke;
+    font-weight: bold;
+}
+.bookmarkButton:hover {
+    background-color: rgba(47, 109, 180, 0.9);
+}
+.addNewBookmark {
+    margin: 50px auto;
+    width: 240px;
+}
 /*Footer styling
 ==================================*/
 footer {

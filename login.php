@@ -80,6 +80,7 @@
             else {
                 $GLOBALS["logErrorMessages"]["logError"] = "* Login doesn't exist";
             }
+            mysqli_close($dbConnection);
         }
 
         //Function connecting to database and returning database handler

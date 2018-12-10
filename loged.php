@@ -1,31 +1,42 @@
-<?php  session_start(); 
-    //Check if user is not authenticated
-    if (!$_SESSION["authenticated"]) {
-        //Redirect user to the page that not existent in case they are not authenticated
-        header ("Location http://127.0.0.1/tma2/part1/sagsadgqewhdgsadfdsa.php"); 
-    }
+<?php  
     //=============================================================================//
     //***PHP Code ***/
+    session_start(); 
+    //Check if user is not authenticated
+    if (!$_SESSION["authenticated"]) {
+        //Redirect user to login page in case they are not authenticated
+        header ("Location: http://127.0.0.1/tma2/part1/login.php"); 
+    }
 
-        //Get user bookmarks from database
-        function getBookmarks() {
-            $dbConnection = connectToDB();
-            mysqli_select_db($dbConnection, "bookmarks");
+    //Get user bookmarks from database
+    function getBookmarks() {
+        $dbConnection = connectToDB();
+        mysqli_select_db($dbConnection, "bookmarks");
+
+        //get all bookmarks for the this particular user
+        $requestBookmarks = "SELECT * FROM bookmarks WHERE userID = \""  .$_SESSION["userID"] . "\"";
+        $requestResult = mysqli_query($dbConnection, $requestBookmarks);
+
+        return $requestResult;
+    }
+
+    //Function connecting to database and returning database handler
+    function connectToDB() {
+        $dbConnection = mysqli_connect("localhost", "testUser", "GHNKCh3hgmpdE3Ka"); //Connect to db
+
+        if (!$dbConnection) {
+            die ("Couldn't connect to database. Try later or check your credentials");
         }
+        else {
+        }
+        return $dbConnection;
+    }  
 
-        //Function connecting to database and returning database handler
-        function connectToDB() {
-            $dbConnection = mysqli_connect("localhost", "testUser", "GHNKCh3hgmpdE3Ka"); //Connect to db
 
-            if (!$dbConnection) {
-                die ("Couldn't connect to database. Try later or check your credentials");
-            }
-            else {
-                echo ("Database connection successful");
-            }
-            return $dbConnection;
-        }  
-
+    //Check if any form button was pressed
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        
+    }
     //=============================================================================//
     //***PHP Code Ends***/   
 ?>
@@ -51,67 +62,36 @@
         
     <main>
         <div class="bookmarksContainer"> 
-            <h1>Welcome <?php echo $_SESSION["login"]; ?>!</h1>  
-            
+            <h1>Welcome <?php echo $_SESSION["login"]; ?>!</h1>          
 
+            <?php  
+            //=============================================================================//
+            //***PHP Code ***/
 
+            $bookmarks = getBookmarks(); //Get user bookmarks from database
+            $bookmarkCounter = 0;
 
-            <h3>You have the following bookmarks:</h3>
-            <ol>
-                <!-- <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-                <!-- <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
+            if (mysqli_num_rows(($bookmarks)) > 0) {
+                echo "<h3>You have the following bookmarks:</h3><ul><form id=\"bookmarkForm\" action=\"/loged.php\" method=\"POST\">";
+                while ($row = mysqli_fetch_assoc($bookmarks)) {
+                    echo ("<li><input natype=\"text\" name=\"linkName$bookmarkCounter\" class=\"bookmarkFiels\" value=\"" . $row["name"] . "\" disabled />");
+                    echo ("<input natype=\"text\" name=\"linkUrl$bookmarkCounter\" class=\"bookmarkFiels urlField\" value=\"" . $row["url"] . "\" disabled /><wbr>");
+                    echo ("<wbr><a class=\"bookmarkButton\" href=\"" . $row["url"] . "\" target=\"_blank\">Open &#8594;</a><wbr>");
+                    echo ("<button class=\"bookmarkButton\" type=\"submit\" name=\"editBookmark$bookmarkCounter\" formaction=\"loged.php\">Remove</button>");
+                    echo ("<button class=\"bookmarkButton\" name=\"editBookmark$bookmarkCounter\" formaction=\"#\">Edit</button><wbr>");
 
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li>
-
-                <li>Google <a href="https://www.google.com" target="_blank">Open bookmark</a><button class="removeButton">Remove bookmark</button></li> -->
-            </ol> -->
-            <button class="addButton">Add new bookmark</button>
+                    $bookmarkCounter++;
+                }
+                echo "</form></ul>";
+                $bookmarkCounter = 0;
+            }
+            else {
+                echo "<h3>You don't have any bookmarks, but you can add some</h3>";
+            }
+            //=============================================================================//
+            //***PHP Code Ends ***/
+            ?>
+            <button class="bookmarkButton addNewBookmark" id="addBookmark">Add new bookmark</button>
         </div>
     </main>
 
