@@ -23,6 +23,7 @@ const initialize = () => {
       event.preventDefault();
       
       if (event.currentTarget.innerHTML === "Edit") {
+
         event.currentTarget.innerHTML = "Save";
         $(event.currentTarget).next().show();
         $(event.currentTarget).prev().prev().hide();
@@ -34,9 +35,9 @@ const initialize = () => {
         event.currentTarget.innerHTML = "Edit";
         $(event.currentTarget).next().hide();
         $(event.currentTarget).prev().prev().show();
-
         $(event.currentTarget).siblings(".bookmarkFiels").prop("disabled", true);
-        $(event.currentTarget).unbind('submit').submit();    
+        $(event.currentTarget).submit(); 
+    
       }     
     }, false);
   }
@@ -55,6 +56,7 @@ const initialize = () => {
   }
 };
 
+// 
 const showAddFields = () => {
   
   if (addBookmark.innerHTML === "Add new bookmark") {

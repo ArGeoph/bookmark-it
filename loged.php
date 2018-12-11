@@ -47,8 +47,9 @@
 
         //Check if user button to update bookmark
         if (isset($_POST["updateBookmark"])) {
-            echo ("updateBookmark");
-            updateBookmarkInDatabase($_POST["updateBookmark"]);
+            $bookmarkID = $_POST["updateBookmark"];
+            echo $_POST["linkName$bookmarkID"];
+            // updateBookmarkInDatabase($_POST["updateBookmark"]);
             
         }
 
@@ -124,10 +125,10 @@
             $bookmarks = getBookmarks(); //Get user bookmarks from database
 
             if (mysqli_num_rows(($bookmarks)) > 0) {
-                echo "<h3>Your bookmarks:</h3><ul><form id=\"bookmarkForm\" action=\"loged.php\" method=\"POST\">";
+                echo "<h3>Your bookmarks:</h3><ul><form id=\"bookmarkForm\" name=\"theForm\" action=\"loged.php\" method=\"POST\">";
                 while ($row = mysqli_fetch_assoc($bookmarks)) {
-                    echo ("<li><input type=\"text\" name=\"linkName" . $row["bookmarkID"] . "\" class=\"bookmarkFiels\" value=\"" . $row["name"] . "\"  disabled/>");
-                    echo ("<input type=\"text\" name=\"linkUrl" . $row["bookmarkID"] . "\" class=\"bookmarkFiels urlField\" value=\"" . $row["url"] . "\"  disabled />");
+                    echo ("<li><input type=\"text\" name=\"linkName" . $row["bookmarkID"] . "\" class=\"bookmarkFiels\" value=\"" . $row["name"] . "\"  disabled  formaction=\"loged.php\" />");
+                    echo ("<input type=\"text\" name=\"linkUrl" . $row["bookmarkID"] . "\" class=\"bookmarkFiels urlField\" value=\"" . $row["url"] . "\"  disabled  formaction=\"loged.php\" />");
                     echo ("<a class=\"bookmarkButton\" href=\"" . $row["url"] . "\" target=\"_blank\">Open &#8594;</a>");
                     echo ("<button class=\"bookmarkButton\" type=\"submit\" value=\"" . $row["bookmarkID"] . "\"" . $row["bookmarkID"] . " name=\"removeBookmark\" formaction=\"loged.php\">Remove</button>");
                     echo ("<button class=\"bookmarkButton editButton\" type=\"submit\" name='updateBookmark' value=\"" . $row["bookmarkID"] . "\" formaction=\"loged.php\">Edit</button>");
@@ -137,7 +138,10 @@
 
             }
             else {
+                
                 echo "<h3>You don't have any bookmarks, but you can add some</h3>";
+                echo "<form id=\"bookmarkForm\" action=\"loged.php\" method=\"POST\">";
+                echo "</form></ul>";
             }
             //=============================================================================//
             //***PHP Code Ends ***/
