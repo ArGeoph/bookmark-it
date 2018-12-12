@@ -47,10 +47,8 @@
 
         //Check if user button to update bookmark
         if (isset($_POST["updateBookmark"])) {
-            $bookmarkID = $_POST["updateBookmark"];
-            echo $_POST["linkName$bookmarkID"];
-            // updateBookmarkInDatabase($_POST["updateBookmark"]);
-            
+            updateBookmarkInDatabase($_POST["updateBookmark"]);
+           
         }
 
         $_POST = array();   
@@ -64,7 +62,6 @@
 
         $insertQuery = "INSERT INTO bookmarks (userID, url, name) VALUES(" 
             . $_SESSION["userID"] . ", \"" . $_POST["newUrl"] . "\", \"" . $_POST["newUrlName"] . "\")";
-            // echo $insertQuery;
         $insertResult = mysqli_query($dbConnection, $insertQuery);
         mysqli_close($dbConnection);
     }
@@ -74,11 +71,10 @@
         $dbConnection = connectToDB();
         mysqli_select_db($dbConnection, "bookmarks");
 
-        $updateQuery = "UPDATE bookmarks SET url=\"" . $_POST["linkName$bookmarkID"] . 
-            "/, name=\"" . $_POST["linkUrl$bookmarkID"] . "\" WHERE bookmarkID=$bookmarkID" ;
+        $updateQuery = "UPDATE bookmarks SET name=\"" . $_POST["linkName$bookmarkID"] . 
+            "\", url=\"" . $_POST["linkUrl$bookmarkID"] . "\" WHERE bookmarkID=$bookmarkID" ;
         mysqli_query($dbConnection, $updateQuery);
         mysqli_close($dbConnection);
-        echo ("DB closed");
     }
 
     //Remove bookmark with specified id from database 
@@ -130,9 +126,10 @@
                     echo ("<li><input type=\"text\" name=\"linkName" . $row["bookmarkID"] . "\" class=\"bookmarkFiels\" value=\"" . $row["name"] . "\"  disabled  formaction=\"loged.php\" />");
                     echo ("<input type=\"text\" name=\"linkUrl" . $row["bookmarkID"] . "\" class=\"bookmarkFiels urlField\" value=\"" . $row["url"] . "\"  disabled  formaction=\"loged.php\" />");
                     echo ("<a class=\"bookmarkButton\" href=\"" . $row["url"] . "\" target=\"_blank\">Open &#8594;</a>");
-                    echo ("<button class=\"bookmarkButton\" type=\"submit\" value=\"" . $row["bookmarkID"] . "\"" . $row["bookmarkID"] . " name=\"removeBookmark\" formaction=\"loged.php\">Remove</button>");
-                    echo ("<button class=\"bookmarkButton editButton\" type=\"submit\" name='updateBookmark' value=\"" . $row["bookmarkID"] . "\" formaction=\"loged.php\">Edit</button>");
-                    echo ("<button class=\"bookmarkButton cancelButton\" value=\"" . $row["bookmarkID"] . "\" formaction=\"#\">Cancel</button>");
+                    echo ("<button class=\"bookmarkButton\" type=\"submit\" value=\"" . $row["bookmarkID"] . "\" name=\"removeBookmark\" formaction=\"loged.php\">Remove</button>");
+                    echo ("<button class=\"bookmarkButton  editButton\" type=\"button\" name=\"updateBookmark\" value=\"" . $row["bookmarkID"] . "\" formaction=\"loged.php\">Edit</button>");
+                    echo ("<button class=\"bookmarkButton  saveButton hidden\" type=\"submit\" name=\"updateBookmark\" value=\"" . $row["bookmarkID"] . "\" formaction=\"loged.php\">Save</button>");
+                    echo ("<button class=\"bookmarkButton cancelButton hidden\" value=\"" . $row["bookmarkID"] . "\" formaction=\"loged.php\">Cancel</button>");
                 }
                 echo "</form></ul>";
 

@@ -214,11 +214,20 @@ ul {
     margin-bottom: 50px;
 }
 .cancelButton{
-    display: none;
     background-color:  rgba(245, 53, 95, 0.7);
+}
+.hidden {
+    display: none;
 }
 .cancelButton:hover {
     background-color:  rgba(245, 53, 95, 0.9);
+}
+.saveButton {
+    background-color: rgba(73, 163, 73, 0.7);
+}
+
+.saveButton:hover {
+    background-color: rgba(73, 163, 73, 0.9);
 }
 /*Footer styling
 ==================================*/

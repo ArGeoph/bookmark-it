@@ -21,24 +21,13 @@ const initialize = () => {
   for (let i = 0; i < editButtons.length; i++) {
     editButtons[i].addEventListener("click", function(event) {
       event.preventDefault();
-      
-      if (event.currentTarget.innerHTML === "Edit") {
 
-        event.currentTarget.innerHTML = "Save";
-        $(event.currentTarget).next().show();
-        $(event.currentTarget).prev().prev().hide();
-
-        $(event.currentTarget).siblings(".bookmarkFiels").prop("disabled", false);
-        $(event.currentTarget).siblings(":first").focus();
-      }
-      else {        
-        event.currentTarget.innerHTML = "Edit";
-        $(event.currentTarget).next().hide();
-        $(event.currentTarget).prev().prev().show();
-        $(event.currentTarget).siblings(".bookmarkFiels").prop("disabled", true);
-        $(event.currentTarget).submit(); 
-    
-      }     
+      $(event.currentTarget).next().show();
+      $(event.currentTarget).next().next().show();
+      $(event.currentTarget).prev().prev().hide();
+      $(event.currentTarget).siblings(".bookmarkFiels").prop("disabled", false);
+      $(event.currentTarget).siblings(":first").focus();
+      $(event.currentTarget).hide();
     }, false);
   }
 
@@ -47,9 +36,10 @@ const initialize = () => {
     cancelButtons[i].addEventListener("click", function(event) {
       event.preventDefault();
 
-      $(event.currentTarget).prev().html("Edit");
       $(event.currentTarget).siblings("a").show();   
       $(event.currentTarget).siblings(".bookmarkFiels").prop("disabled", true);
+      $(event.currentTarget).prev().hide();
+      $(event.currentTarget).prev().prev().show();
       $(event.currentTarget).hide();
   
     }, false);
