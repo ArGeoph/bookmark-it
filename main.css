@@ -103,8 +103,8 @@ main li {
     border-radius: 9px;
 }
 label {
-    margin-top: 37px;
-    padding-left: 50px;
+    /* margin-top: 37px;
+    padding-left: 50px; */
     float: left;
     width: 260px;
     font-size: 1.6em;
@@ -114,6 +114,7 @@ label {
 .formFields{
     margin-top: 40px;
     width: 480px;
+    -webkit-box-sizing: border-box;
 }
 .buttonsContainer {
     margin-top: 50px;
@@ -143,6 +144,12 @@ label {
     height: 520px;
     border: 3px solid rgba(47, 109, 180, 0.5);;
     border-radius: 9px;
+}
+
+.loginForm > label, .registerForm > label {
+    margin-top: 30px;
+    padding-left: 80px;
+
 }
 .addButton, .removeButton {
     margin-left: 30px;
@@ -207,7 +214,7 @@ ul {
     width: 240px;
 }
 #bookmarkForm {
-    padding: 80px 100px 100px 100px;
+    padding: 20px 100px 100px 100px;
     border-radius: 8px;
     border: 3px solid rgba(10, 124, 255, 0.7);   
     margin: 75px auto;
@@ -235,6 +242,19 @@ ul {
     margin-left: 20px;
     margin-bottom: 40px;
 }
+p.mainPage {
+    margin-left: 30px;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+}
+p.userPage {
+    margin-left: -20px;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+}
+input.mainPage {
+    background-color: rgb(248, 233, 217);
+}
 /*Footer styling
 ==================================*/
 footer {
@@ -252,7 +272,7 @@ footer {
     padding: 0px 0px;
     border-top: 2px solid rgb(0, 0, 0);
     letter-spacing: 2px;
-    height: 120px;
+    height: 145px;
     box-shadow: -3px -3px 20px rgba(9, 15, 126, 0.5);
     clear: both;
 }

@@ -168,8 +168,8 @@
             $dbConnection = connectToDB();
             mysqli_select_db($dbConnection, "bookmarks");
 
-            $query = "INSERT INTO login (email, log, pass, timeCreated) VALUES (" . "\"" .  $GLOBALS["email"] . "\"" .  "," . "\"" . $GLOBALS["login"] . "\"" . "," 
-            . "\"" . password_hash($GLOBALS["password1"], PASSWORD_BCRYPT) . "\"" ."," . "\"" . date("Y-M-DD h:i:sa") . "\"" . ")";
+            $query = "INSERT INTO login (email, log, pass) VALUES (" . "\"" .  $GLOBALS["email"] . "\"" .  "," . "\"" . $GLOBALS["login"] . "\"" . "," 
+            . "\"" . password_hash($GLOBALS["password1"], PASSWORD_BCRYPT) . "\")";
 
             $result = mysqli_query($dbConnection, $query);
 
@@ -210,7 +210,7 @@
     <main>
         <div class="registerContainer"> 
             <h1>Register</h1>   
-            <form action="register.php" method="Post" autocomplete="off" >
+            <form action="register.php" method="Post" class="registerForm" autocomplete="off" >
                 <input type="password" style="display:none">
                 <label>First name</label><input type="text" class="formFields" name="firstName" value="<?php echo $firstName; ?>" placeholder="John" />
                     <span class="error"><?php echo $errorMessages["firstName"] ?></span><br>

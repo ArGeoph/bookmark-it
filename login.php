@@ -118,7 +118,7 @@
     <main>
         <div class="loginContainer"> 
             <h1>Login</h1>   
-            <form action="login.php" method="Post" autocomplete="off" >
+            <form action="login.php" class="loginForm" method="POST" autocomplete="off" >
                 <input type="password" style="display:none">
                 <label>Login</label><input type="text" class="formFields" name="login" value="<?php echo $login ?>"/>
                 <span class="error"><?php echo $logErrorMessages["logError"]; ?></span><br>
