@@ -207,11 +207,13 @@ ul {
     width: 240px;
 }
 #bookmarkForm {
-    padding: 100px 100px;
+    padding: 80px 100px 100px 100px;
     border-radius: 8px;
     border: 3px solid rgba(10, 124, 255, 0.7);   
-    margin-top: 55px;
-    margin-bottom: 50px;
+    margin: 75px auto;
+}
+.bookmarksContainer {
+    
 }
 .cancelButton{
     background-color:  rgba(245, 53, 95, 0.7);
@@ -228,6 +230,10 @@ ul {
 
 .saveButton:hover {
     background-color: rgba(73, 163, 73, 0.9);
+}
+.fieldLabel {
+    margin-left: 20px;
+    margin-bottom: 40px;
 }
 /*Footer styling
 ==================================*/

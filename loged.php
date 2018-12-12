@@ -121,9 +121,11 @@
             $bookmarks = getBookmarks(); //Get user bookmarks from database
 
             if (mysqli_num_rows(($bookmarks)) > 0) {
-                echo "<h3>Your bookmarks:</h3><ul><form id=\"bookmarkForm\" name=\"theForm\" action=\"loged.php\" method=\"POST\">";
+                echo "<h3>Your bookmarks</h3><ul><li><p class='fieldLabel'><label>Website name</label><label>URL</label></p></li><form id=\"bookmarkForm\" name=\"theForm\" action=\"loged.php\" method=\"POST\">";
                 while ($row = mysqli_fetch_assoc($bookmarks)) {
+                                    
                     echo ("<li><input type=\"text\" name=\"linkName" . $row["bookmarkID"] . "\" class=\"bookmarkFiels\" value=\"" . $row["name"] . "\"  disabled  formaction=\"loged.php\" />");
+    
                     echo ("<input type=\"text\" name=\"linkUrl" . $row["bookmarkID"] . "\" class=\"bookmarkFiels urlField\" value=\"" . $row["url"] . "\"  disabled  formaction=\"loged.php\" />");
                     echo ("<a class=\"bookmarkButton\" href=\"" . $row["url"] . "\" target=\"_blank\">Open &#8594;</a>");
                     echo ("<button class=\"bookmarkButton\" type=\"submit\" value=\"" . $row["bookmarkID"] . "\" name=\"removeBookmark\" formaction=\"loged.php\">Remove</button>");
